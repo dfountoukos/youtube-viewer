@@ -1,6 +1,10 @@
 import React from "react";
 
-const VideoDetail = ({ video }) => {
+interface VideoDetailProps {
+  video?: YoutubeVideo
+}
+
+const VideoDetail:React.FC<VideoDetailProps> = ({ video }) => {
   if (!video) {
     return <div>Loading...</div>;
   }
