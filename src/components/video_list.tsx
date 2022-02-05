@@ -1,12 +1,13 @@
 import React from "react";
 import VideoListItem from "./video_list_item";
+import { YoutubeVideoSearchItem } from "youtube.ts";
 
 interface VideoListProps {
-  videos: Array<YoutubeVideo>
-  onVideoSelect: (video: YoutubeVideo) => void
+  videos: Array<YoutubeVideoSearchItem>;
+  onVideoSelect: (video: YoutubeVideoSearchItem) => void;
 }
 
-const VideoList:React.FC<VideoListProps> = ({ videos, onVideoSelect }) => {
+const VideoList: React.FC<VideoListProps> = ({ videos, onVideoSelect }) => {
   const videoItems = videos.map((video) => {
     return (
       <VideoListItem
@@ -17,7 +18,7 @@ const VideoList:React.FC<VideoListProps> = ({ videos, onVideoSelect }) => {
     );
   });
 
-  return <ul className="col-md-4 list-group">{videoItems}</ul>;
+  return <ul className="list-group">{videoItems}</ul>;
 };
 
 export default VideoList;

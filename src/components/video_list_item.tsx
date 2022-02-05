@@ -1,8 +1,9 @@
 import React from "react";
+import { YoutubeVideoSearchItem } from "youtube.ts"
 
 interface  VideoListItemProps {
-  video: YoutubeVideo;
-  onVideoSelect: (video: YoutubeVideo) => void
+  video: YoutubeVideoSearchItem;
+  onVideoSelect: (video: YoutubeVideoSearchItem) => void
 }
 const VideoListItem: React.FC<VideoListItemProps> = ({ video, onVideoSelect }) => {
   const imageUrl = video.snippet.thumbnails.default.url;

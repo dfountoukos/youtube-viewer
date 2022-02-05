@@ -1,7 +1,8 @@
 import React from "react";
+import { YoutubeVideoSearchItem } from "youtube.ts"
 
 interface VideoDetailProps {
-  video?: YoutubeVideo
+  video?: YoutubeVideoSearchItem
 }
 
 const VideoDetail:React.FC<VideoDetailProps> = ({ video }) => {
@@ -13,7 +14,7 @@ const VideoDetail:React.FC<VideoDetailProps> = ({ video }) => {
   const url = `https://www.youtube.com/embed/${videoId}`;
 
   return (
-    <div className="video-detail col-md-8">
+    <div className="video-detail">
       <div className="embed-responsive embed-responsive-16by9">
         <iframe
           title={video.snippet.title}

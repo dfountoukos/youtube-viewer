@@ -1,42 +1,48 @@
 import React, { useEffect, useState } from "react";
 import _ from "lodash";
-import YTSearch from "youtube-api-search";
 import SearchBar from "./components/search_bar";
-import VideoList from "./components/video_list";
+import VideoCommentList from "./components/video_comment_list";
 import VideoDetail from "./components/video_detail";
-
-const API_KEY = "AIzaSyBwGseFWjTJ9wwGVpB-gB9_E3DoYFzmE-4";
-// const API_KEY = "AIzaSyCbcQMTPqAevOao2BQsQadm5SFTZljP2dM" // provided by exercise;
+import VideoList from "./components/video_list";
+import { youtubeSearch } from "services/youtube";
+import { YoutubeVideoSearchItem } from "youtube.ts";
 
 const App = () => {
-  const [videos, setVideos] = useState<Array<YoutubeVideo>>([]);
-  const [selectedVideo, setSelectedVideo] = useState<YoutubeVideo>();
+  const [videos, setVideos] = useState<Array<YoutubeVideoSearchItem>>([]);
+  const [selectedVideo, setSelectedVideo] = useState<YoutubeVideoSearchItem>();
 
   useEffect(() => {
     videoSearch("liverpool");
-  }, [])
+  }, []);
 
-  const videoSearch = (term: string) => {
-    YTSearch({ key: API_KEY, term }, (videos) => {
-      setVideos(videos)
-      setSelectedVideo(videos[0])
-    });
-  }
+  const videoSearch = async (term: string) => {
+    const videos = await youtubeSearch(term);
+
+    setVideos(videos);
+    setSelectedVideo(videos[0]);
+  };
 
   const debouncedVideoSearch = _.debounce((term: string) => {
     videoSearch(term);
-  }, 300)
+  }, 300);
 
   return (
     <div>
       <SearchBar onSearchTermChange={debouncedVideoSearch} />
-      <VideoDetail video={selectedVideo} />
-      <VideoList
-        onVideoSelect={(selectedVideo) => setSelectedVideo(selectedVideo)}
-        videos={videos}
-      />
+      <div className="col-md-8">
+        <div className="m-b-2">
+          <VideoDetail video={selectedVideo} />
+        </div>
+        <VideoCommentList videoId={selectedVideo?.id.videoId} />
+      </div>
+      <div className="col-md-4">
+        <VideoList
+          onVideoSelect={(selectedVideo) => setSelectedVideo(selectedVideo)}
+          videos={videos}
+        />
+      </div>
     </div>
   );
-}
+};
 
 export default App;
