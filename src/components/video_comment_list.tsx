@@ -7,9 +7,9 @@ interface VideoCommentListProps {
 }
 
 const VideoCommentList: React.FC<VideoCommentListProps> = ({ videoId }) => {
-  const [commentThreads, setCommentThreads] = useState<
-    Awaited<ReturnType<typeof youtubeComments>>
-  >([]);
+  const [commentThreads, setCommentThreads] = useState<Awaited<
+    ReturnType<typeof youtubeComments>
+  > | null>(null);
 
   useEffect(() => {
     if (videoId) {
@@ -25,20 +25,22 @@ const VideoCommentList: React.FC<VideoCommentListProps> = ({ videoId }) => {
     }
   }, [videoId]);
 
-  if (!videoId || !commentThreads.length) {
-    return <div>Loading comments...</div>;
-  }
-
   return (
     <>
       <h4>Comments</h4>
-      <ul className="media-list">
-        {commentThreads.map((thread) => (
-          <li className="media" key={thread.id}>
-            <VideoCommentListItem thread={thread} />
-          </li>
-        ))}
-      </ul>
+      {(!videoId || !commentThreads) && <p>Loading comments...</p>}
+
+      {!commentThreads?.length && <p>No comments exist for this video yet</p>}
+
+      {!!commentThreads?.length && (
+        <ul className="media-list">
+          {commentThreads.map((thread) => (
+            <li className="media" key={thread.id}>
+              <VideoCommentListItem thread={thread} />
+            </li>
+          ))}
+        </ul>
+      )}
     </>
   );
 };
