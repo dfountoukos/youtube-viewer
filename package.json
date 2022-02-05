@@ -10,7 +10,7 @@
     "react-redux": "^7.2.6",
     "react-scripts": "^4.0.3",
     "redux": "^4.1.2",
-    "youtube-api-search": "0.0.5"
+    "youtube.ts": "^0.2.5"
   },
   "devDependencies": {
     "@types/jest": "^27.4.0",
