@@ -2,11 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
-import configureStore from "./redux/store";
+import store from "./redux/store";
 import App from "./App";
 
 const ConnectedApp = () => (
-  <Provider store={configureStore()}>
+  <Provider store={store}>
     <App />
   </Provider>
 );
