@@ -1,29 +1,26 @@
 import React from "react";
-import { YoutubeCommentThread } from "youtube.ts";
 import VideoComment from "./video_comment";
 
 interface VideoCommentListItemProps {
-  thread: YoutubeCommentThread;
+  thread: VideoCommentThread;
 }
 
 const VideoCommentListItem: React.FC<VideoCommentListItemProps> = ({
   thread,
 }) => (
   <VideoComment
-    authorChannelUrl={thread.snippet.topLevelComment.snippet.authorChannelUrl}
-    authorProfileImageUrl={
-      thread.snippet.topLevelComment.snippet.authorProfileImageUrl
-    }
-    authorDisplayName={thread.snippet.topLevelComment.snippet.authorDisplayName}
-    commentText={thread.snippet.topLevelComment.snippet.textOriginal}
+    authorChannelUrl={thread.topLevelComment.authorChannelUrl}
+    authorProfileImageUrl={thread.topLevelComment.authorProfileImageUrl}
+    authorDisplayName={thread.topLevelComment.authorDisplayName}
+    commentText={thread.topLevelComment.commentText}
   >
-    {(thread.replies?.comments || []).map((comment) => (
+    {thread.replies.map((comment) => (
       <div className="media" key={comment.id}>
         <VideoComment
-          authorChannelUrl={comment.snippet.authorChannelUrl}
-          authorProfileImageUrl={comment.snippet.authorProfileImageUrl}
-          authorDisplayName={comment.snippet.authorDisplayName}
-          commentText={comment.snippet.textOriginal}
+          authorChannelUrl={comment.authorChannelUrl}
+          authorProfileImageUrl={comment.authorProfileImageUrl}
+          authorDisplayName={comment.authorDisplayName}
+          commentText={comment.commentText}
         />
       </div>
     ))}

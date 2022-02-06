@@ -1,36 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { youtubeComments } from "services/youtube";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchVideoCommentThreads } from "../redux/actions/commentThreads";
+import { getSelectedVideoId } from "../redux/selectors/videos";
+import { getCommentThreads } from "../redux/selectors/commentThreads";
 import VideoCommentListItem from "./video_comment_list_item";
 
-interface VideoCommentListProps {
-  videoId?: string;
-}
-
-const VideoCommentList: React.FC<VideoCommentListProps> = ({ videoId }) => {
-  const [commentThreads, setCommentThreads] = useState<Awaited<
-    ReturnType<typeof youtubeComments>
-  > | null>(null);
+const VideoCommentList: React.FC = () => {
+  const dispatch = useDispatch();
+  const selectedVideoId = useSelector(getSelectedVideoId);
+  const commentThreads = useSelector(getCommentThreads);
 
   useEffect(() => {
-    if (videoId) {
-      const fetchCommentThreads = async (videoId: string) => {
-        const results = await youtubeComments(videoId);
-
-        console.log(results);
-
-        return setCommentThreads(results);
-      };
-
-      fetchCommentThreads(videoId);
-    }
-  }, [videoId]);
+    selectedVideoId && dispatch(fetchVideoCommentThreads(selectedVideoId));
+  }, [dispatch, selectedVideoId]);
 
   return (
     <>
       <h4>Comments</h4>
-      {(!videoId || !commentThreads) && <p>Loading comments...</p>}
+      {!selectedVideoId && <p>Loading comments...</p>}
 
-      {!commentThreads?.length && <p>No comments exist for this video yet</p>}
+      {selectedVideoId && !commentThreads.length && (
+        <p>No comments exist for this video yet</p>
+      )}
 
       {!!commentThreads?.length && (
         <ul className="media-list">

@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useCallback, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import _ from "lodash";
+import { searchVideos } from "../redux/actions/videos";
 
-interface SearchBarProps {
-  onSearchTermChange: (term: string) => void
-}
+const SearchBar: React.FC = () => {
+  const dispatch = useDispatch();
+  const debouncedSearchVideos = _.debounce(
+    (term: string) => dispatch(searchVideos(term)),
+    300
+  );
+  const searchVideosCallback = useCallback(debouncedSearchVideos, [
+    debouncedSearchVideos,
+  ]);
 
-const SearchBar: React.FC<SearchBarProps> = ({ onSearchTermChange }) => {
+  useEffect(() => {
+    searchVideosCallback("liverpool");
+  }, [searchVideosCallback]);
+
   return (
     <div className="search-bar">
-      <input
-        onChange={(event) => onSearchTermChange(event.target.value)}
-      />
+      <input onChange={(event) => searchVideosCallback(event.target.value)} />
     </div>
   );
-}
+};
 
 export default SearchBar;
