@@ -18,10 +18,10 @@
   border-radius: 4px;
 }
 
-.list-group-item {
+.clickable {
   cursor: pointer;
 }
 
-.list-group-item:hover {
+.clickable:hover {
   background-color: #eee;
 }

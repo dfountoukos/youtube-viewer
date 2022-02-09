@@ -26,7 +26,7 @@ const VideoCommentList: React.FC = () => {
       {!!commentThreads.length && (
         <ul className="media-list">
           {commentThreads.map((thread) => (
-            <li className="media" key={thread.id}>
+            <li className="list-group-item" key={thread.id}>
               <VideoCommentListItem thread={thread} />
             </li>
           ))}

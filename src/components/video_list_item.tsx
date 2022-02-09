@@ -19,7 +19,7 @@ const VideoListItem: React.FC<VideoListItemProps> = ({ videoId }) => {
   return (
     <li
       onClick={onVideoSelect}
-      className="list-group-item"
+      className="list-group-item clickable"
       data-testid={videoId}
     >
       <div className="video-list media">
