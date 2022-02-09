@@ -23,7 +23,7 @@ const VideoCommentList: React.FC = () => {
         <p>No comments exist for this video yet</p>
       )}
 
-      {!!commentThreads?.length && (
+      {!!commentThreads.length && (
         <ul className="media-list">
           {commentThreads.map((thread) => (
             <li className="media" key={thread.id}>

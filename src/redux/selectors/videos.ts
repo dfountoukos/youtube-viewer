@@ -6,5 +6,9 @@ export const getSelectedVideoId = ({ videos }: RootState) =>
 export const getCurrentVideo = ({ videos }: RootState) =>
   videos.byId[videos.selectedVideoId];
 
-export const getAllVideos = ({ videos }: RootState) =>
-  Object.values(videos.byId ?? []);
+export const getVideoById = (
+  { videos }: RootState,
+  { videoId }: { videoId: string }
+) => videos.byId[videoId];
+
+export const getAllVideoIds = ({ videos }: RootState) => videos.allIds ?? [];

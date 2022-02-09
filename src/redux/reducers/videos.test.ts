@@ -21,13 +21,11 @@ describe("videos reducer", () => {
   };
 
   it("returns the existing state value when the action is not handled", () => {
-    const testState: VideosState = initialState;
-
     const action = { type: "NOT_HANDLED_ACTION" } as any;
 
     const actual = videosReducer(undefined, action);
 
-    expect(actual).toEqual(testState);
+    expect(actual).toEqual(initialState);
   });
 
   describe(`${VideosActionTypes.UpdateVideos}`, () => {
@@ -89,7 +87,7 @@ describe("videos reducer", () => {
       expect(actual).toEqual(expectedState);
     });
 
-    it("sets the selected video id to undefined when payload is missing", () => {
+    it("does not update the selected video id state when action payload is missing", () => {
       const testState: VideosState = {
         byId: {
           [mockVideo1.id]: mockVideo1,
@@ -99,16 +97,11 @@ describe("videos reducer", () => {
         selectedVideoId: mockVideo1.id,
       };
 
-      const expectedState: VideosState = {
-        ...testState,
-        selectedVideoId: undefined,
-      };
-
       const action = setSelectedVideoIdAction(undefined);
 
       const actual = videosReducer(testState, action);
 
-      expect(actual).toEqual(expectedState);
+      expect(actual).toEqual(testState);
     });
   });
 });

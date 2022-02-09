@@ -20,7 +20,7 @@ describe("commentThreads selectors", () => {
           authorDisplayName: "authorName",
           commentText: "comment text",
         },
-        replies: [{}],
+        replies: [],
       };
 
       const testState: RootState = {

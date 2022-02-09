@@ -1,6 +1,6 @@
 import { initialState as videosInitialState } from "../reducers/videos";
 import { RootState } from "../store";
-import { getAllVideos, getCurrentVideo, getSelectedVideoId } from "./videos";
+import { getAllVideoIds, getCurrentVideo, getSelectedVideoId } from "./videos";
 describe("videos selectors", () => {
   const initialState: RootState = {
     videos: videosInitialState,
@@ -37,8 +37,8 @@ describe("videos selectors", () => {
           byId: {
             videoId: mockVideo,
           },
-          allIds: ["videoId"],
-          selectedVideoId: "videoId",
+          allIds: [mockVideo.id],
+          selectedVideoId: mockVideo.id,
         },
       };
 
@@ -73,7 +73,7 @@ describe("videos selectors", () => {
   });
 
   describe("getAllVideos", () => {
-    it("returns an array with all available videos in state", () => {
+    it("returns an array with all available video ids in state", () => {
       const mockVideo = {
         id: "videoId",
         title: "videoTitle",
@@ -92,12 +92,12 @@ describe("videos selectors", () => {
         },
       };
 
-      const actual = getAllVideos(testState);
+      const actual = getAllVideoIds(testState);
 
-      expect(actual).toEqual([mockVideo]);
+      expect(actual).toEqual([mockVideo.id]);
     });
 
-    it("returns an empty array when videos by id is undefined", () => {
+    it("returns an empty array when allVideos array is undefined", () => {
       const mockVideo = {
         id: "videoId",
         title: "videoTitle",
@@ -108,13 +108,13 @@ describe("videos selectors", () => {
       const testState: RootState = {
         ...initialState,
         videos: {
-          byId: undefined,
-          allIds: [mockVideo.id],
+          byId: {},
+          allIds: undefined,
           selectedVideoId: mockVideo.id,
         },
       };
 
-      const actual = getAllVideos(testState);
+      const actual = getAllVideoIds(testState);
 
       expect(actual).toEqual([]);
     });
@@ -129,7 +129,7 @@ describe("videos selectors", () => {
         },
       };
 
-      const actual = getAllVideos(testState);
+      const actual = getAllVideoIds(testState);
 
       expect(actual).toEqual([]);
     });

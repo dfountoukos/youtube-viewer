@@ -1,8 +1,6 @@
 import { VideoAction } from "../actions/videos";
 import { VideosActionTypes } from "../actions/types";
 
-// TODO move types to another file
-
 export interface VideosState {
   selectedVideoId: string;
   byId: Record<string, Video>;
@@ -23,7 +21,10 @@ const videosReducer = (
     case VideosActionTypes.UpdateVideos:
       return action.payload || state;
     case VideosActionTypes.SetSelectedVideoId:
-      return { ...state, selectedVideoId: action.payload?.id };
+      return {
+        ...state,
+        selectedVideoId: action.payload?.id || state.selectedVideoId,
+      };
     default:
       return state;
   }

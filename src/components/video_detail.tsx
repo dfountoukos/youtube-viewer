@@ -21,7 +21,7 @@ const VideoDetail: React.FC = () => {
         />
       </div>
       <div className="details">
-        <div>{video.title}</div>
+        <h5>{video.title}</h5>
         <div>{video.description}</div>
       </div>
     </div>

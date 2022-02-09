@@ -3,8 +3,6 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import rootReducer from "./reducers";
-import { VideosState } from "./reducers/videos";
-import { CommentThreadsState } from "./reducers/commentThreads";
 
 const composeEnhancers =
   process.env.NODE_ENV === "development"
@@ -15,15 +13,15 @@ const composeEnhancers =
       })
     : compose;
 
-const configureStore = () =>
-  createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
+export const configureStore = (initialState?: Record<string, any>) =>
+  createStore(
+    rootReducer,
+    initialState,
+    composeEnhancers(applyMiddleware(thunk))
+  );
 
 const store = configureStore();
 
-export type RootState = {
-  videos: VideosState
-  commentThreads: CommentThreadsState
-}
-
+export type RootState = ReturnType<typeof store.getState>;
 
 export default store;

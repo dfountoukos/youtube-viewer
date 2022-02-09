@@ -1,11 +1,11 @@
 import React, { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import _ from "lodash";
+import debounce from "lodash/debounce";
 import { searchVideos } from "../redux/actions/videos";
 
 const SearchBar: React.FC = () => {
   const dispatch = useDispatch();
-  const debouncedSearchVideos = _.debounce(
+  const debouncedSearchVideos = debounce(
     (term: string) => dispatch(searchVideos(term)),
     300
   );

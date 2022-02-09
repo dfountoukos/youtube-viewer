@@ -4,8 +4,7 @@ import Youtube, {
   YoutubeCommentThread,
 } from "youtube.ts";
 
-// const API_KEY = "AIzaSyBwGseFWjTJ9wwGVpB-gB9_E3DoYFzmE-4";
-const API_KEY = "AIzaSyCbcQMTPqAevOao2BQsQadm5SFTZljP2dM"; // provided by exercise;
+const API_KEY = "AIzaSyCbcQMTPqAevOao2BQsQadm5SFTZljP2dM";
 
 const youtube = new Youtube(API_KEY);
 
