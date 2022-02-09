@@ -1,3 +1,4 @@
+import { createVideo } from "../../testUtils";
 import { initialState as videosInitialState } from "../reducers/videos";
 import { RootState } from "../store";
 import { getAllVideoIds, getCurrentVideo, getSelectedVideoId } from "./videos";
@@ -24,12 +25,7 @@ describe("videos selectors", () => {
 
   describe("getCurrentVideo", () => {
     it("returns the currently selected video", () => {
-      const mockVideo = {
-        id: "videoId",
-        title: "videoTitle",
-        description: "videoDescription",
-        thumbnailUrl: "thumbnailUrl",
-      };
+      const mockVideo = createVideo();
 
       const testState: RootState = {
         ...initialState,
@@ -48,12 +44,7 @@ describe("videos selectors", () => {
     });
 
     it("returns undefined when the selectedVideoId does not match any of the videos in state", () => {
-      const mockVideo = {
-        id: "videoId",
-        title: "videoTitle",
-        description: "videoDescription",
-        thumbnailUrl: "thumbnailUrl",
-      };
+      const mockVideo = createVideo();
 
       const testState: RootState = {
         ...initialState,
@@ -74,12 +65,7 @@ describe("videos selectors", () => {
 
   describe("getAllVideos", () => {
     it("returns an array with all available video ids in state", () => {
-      const mockVideo = {
-        id: "videoId",
-        title: "videoTitle",
-        description: "videoDescription",
-        thumbnailUrl: "thumbnailUrl",
-      };
+      const mockVideo = createVideo();
 
       const testState: RootState = {
         ...initialState,
@@ -98,12 +84,7 @@ describe("videos selectors", () => {
     });
 
     it("returns an empty array when allVideos array is undefined", () => {
-      const mockVideo = {
-        id: "videoId",
-        title: "videoTitle",
-        description: "videoDescription",
-        thumbnailUrl: "thumbnailUrl",
-      };
+      const mockVideo = createVideo();
 
       const testState: RootState = {
         ...initialState,

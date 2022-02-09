@@ -1,6 +1,7 @@
 import { getCommentThreads } from "./commentThreads";
 import { RootState } from "../store";
 import { initialState as videosInitialState } from "../reducers/videos";
+import { createComment } from "../../testUtils";
 
 describe("commentThreads selectors", () => {
   describe("getCommentThreads", () => {
@@ -13,13 +14,7 @@ describe("commentThreads selectors", () => {
     it("it returns the array of comments existing in state", () => {
       const mockCommentThread = {
         id: "threadId",
-        topLevelComment: {
-          id: "tlCommentId",
-          authorChannelUrl: "tlAuthorUrl",
-          authorProfileImageUrl: "tlProfileImageUrl",
-          authorDisplayName: "authorName",
-          commentText: "comment text",
-        },
+        topLevelComment: createComment("tl"),
         replies: [],
       };
 

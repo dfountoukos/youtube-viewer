@@ -2,17 +2,12 @@ import { CommentThreadActionTypes } from "../actions/types";
 import commentThreadsReducer, { CommentThreadsState } from "./commentThreads";
 import { updateCommentThreadsAction } from "../actions/commentThreads";
 import { initialState } from "./commentThreads";
+import { createComment } from "../../testUtils";
 
 describe("commentThreads reducer", () => {
   const mockCommentThread = {
     id: "threadId",
-    topLevelComment: {
-      id: "tlCommentId",
-      authorChannelUrl: "tlAuthorUrl",
-      authorProfileImageUrl: "tlProfileImageUrl",
-      authorDisplayName: "authorName",
-      commentText: "comment text",
-    },
+    topLevelComment: createComment("tl"),
     replies: [{}],
   };
 

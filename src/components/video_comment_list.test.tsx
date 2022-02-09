@@ -1,5 +1,5 @@
 import { RootState } from "../redux/store";
-import { renderWithRedux } from "../testUtils";
+import { createVideo, renderWithRedux } from "../testUtils";
 import { youtubeComments } from "../services/youtube";
 import VideoCommentList from "./video_comment_list";
 
@@ -31,12 +31,7 @@ describe("VideoCommentList", () => {
       },
     };
 
-    const mockVideo = {
-      id: "videoId",
-      title: "videoTitle",
-      description: "videoDescription",
-      thumbnailUrl: "thumbnailUrl",
-    };
+    const mockVideo = createVideo();
 
     const initialState: RootState = {
       videos: {
@@ -100,12 +95,7 @@ describe("VideoCommentList", () => {
   });
 
   it("renders no comments exist state when no comment threads exist for the selected video", () => {
-    const mockVideo = {
-      id: "videoId",
-      title: "videoTitle",
-      description: "videoDescription",
-      thumbnailUrl: "thumbnailUrl",
-    };
+    const mockVideo = createVideo()
 
     const initialState: RootState = {
       videos: {

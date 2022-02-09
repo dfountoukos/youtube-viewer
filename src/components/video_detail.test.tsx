@@ -1,15 +1,10 @@
 import { RootState } from "../redux/store";
-import { renderWithRedux } from "../testUtils";
+import { createVideo, renderWithRedux } from "../testUtils";
 import VideoDetail from "./video_detail";
 
 describe("VideoDetail", () => {
   it("renders video and description", () => {
-    const mockVideo = {
-      id: "videoId",
-      title: "videoTitle",
-      description: "videoDescription",
-      thumbnailUrl: "thumbnailUrl",
-    };
+    const mockVideo = createVideo()
 
     const initialState: RootState = {
       videos: {

@@ -1,3 +1,4 @@
+import { createVideo } from "../../testUtils";
 import { VideosActionTypes } from "../actions/types";
 import {
   setSelectedVideoIdAction,
@@ -6,19 +7,8 @@ import {
 import videosReducer, { initialState, VideosState } from "./videos";
 
 describe("videos reducer", () => {
-  const mockVideo1 = {
-    id: "videoId1",
-    title: "videoTitle1",
-    description: "videoDescription1",
-    thumbnailUrl: "thumbnailUrl1",
-  };
-
-  const mockVideo2 = {
-    id: "videoId2",
-    title: "videoTitle2",
-    description: "videoDescription2",
-    thumbnailUrl: "thumbnailUrl2",
-  };
+  const mockVideo1 = createVideo("1");
+  const mockVideo2 = createVideo("2");
 
   it("returns the existing state value when the action is not handled", () => {
     const action = { type: "NOT_HANDLED_ACTION" } as any;

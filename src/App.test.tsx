@@ -1,22 +1,8 @@
 import App from "./App";
 import { RootState } from "./redux/store";
-import { renderWithRedux, within } from "./testUtils";
+import { renderWithRedux, within, createVideo, createComment } from "./testUtils";
 
 describe("App", () => {
-  const createComment = (discriminator: string = "") => ({
-    id: `commentId${discriminator}`,
-    authorChannelUrl: `authorChannelUrl${discriminator}`,
-    authorProfileImageUrl: `authorProfileImageUrl${discriminator}`,
-    authorDisplayName: `authorDisplayName${discriminator}`,
-    commentText: `commentText${discriminator}`,
-  });
-
-  const createVideo = (discriminator: string = "") => ({
-    id: `videoId${discriminator}`,
-    title: `videoTitle${discriminator}`,
-    description: `videoDescription${discriminator}`,
-    thumbnailUrl: `thumbnailUrl${discriminator}`,
-  });
 
   it("renders app elements", () => {
     const mockVideo1 = createVideo("1");
